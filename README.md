@@ -8,7 +8,6 @@ Recorre archivos fuente de izquierda a derecha y produce una secuencia ordenada 
 
 ## Estructura
 ```
-docs/               # especificación, regex, autómatas, determinización/minimización
 src/                # analizador (tipo, lexema, línea, columna + tabla de lexemas + errores)
 tests/
   validos/          # >=20 pruebas válidas, todas las categorías
@@ -24,11 +23,10 @@ Ejemplo: `<ATOMO, 'padre', 2, 1>`
 ```bash
 python3 src/lexer.py tests/completos/programa_ok.pl
 ```
-_Pendiente Fase 5: definir CLI final y formato de errores._
 
-## Convenciones fijadas (Fase 1 pendiente)
-- [ ] signo `-` es operador separado vs parte de número
-- [ ] escapes en `'...'` y `"..."`
-- [ ] `/* ... */` anidado o no
-- [ ] `.` final solo si va seguido de blanco/salto/fin
-- [ ] prioridad `is`/`mod` y máxima coincidencia
+## Convenciones fijadas
+- [x] signo `-` siempre operador separado, nunca parte del número
+- [x] escapes: `'...'` con `''` + `\' \\ \n \t \r`; `"..."` con `\" \\ \n \t \r`
+- [x] `/* ... */` no anidado, primer `*/` cierra
+- [x] `.` final solo si va seguido de blanco/salto/`%`/`/*`/EOF
+- [x] prioridad `is`/`mod` como palabra completa + máxima coincidencia

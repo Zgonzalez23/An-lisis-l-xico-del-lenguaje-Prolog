@@ -22,7 +22,24 @@ Ejemplo: `<ATOMO, 'padre', 2, 1>`
 ## Cómo ejecutar
 ```bash
 python3 src/lexer.py tests/completos/programa_ok.pl
+python3 src/lexer.py tests/completos/programa_errores.pl
+python3 src/lexer.py <archivo.pl> --tabla   # + tabla atomos/variables/literales
 ```
+
+## Corpus reproducible
+```bash
+python3 tests/run_tests.py            # resumen (exige 0 errores en validos/ok)
+python3 tests/run_tests.py --verbose  # + tokens y errores por archivo
+```
+- `tests/validos/` (21): v01_atomos … v21_escapes; incluye v18 máxima
+  coincidencia (`a:-b.`, `X==Y`, `\==` vs `\=`, `=..`, `//` vs `/`, `**` vs `*`,
+  `-->` vs `-`, `\+`) y v19 prioridad (`is`/`mod` vs `island`/`mod2`/`is_1`).
+- `tests/invalidos/` (10): e01–e02 átomo sin cierre (salto/EOF), e03–e04 cadena
+  sin cierre (salto/EOF), e05 bloque sin cierre, e06 caracteres no admitidos
+  (`@ # $ & \` ~`), e07 punto sin decimales (`3.x`), e08 exponente sin dígitos
+  (`1e`, `2E+`), e09 punto mal ubicado (`a.b`), e10 `:`/`?`/`\` aislados.
+- `tests/completos/`: `programa_ok.pl` (0 errores, 39/39 tipos) y
+  `programa_errores.pl` (11 errores recuperables, sigue emitiendo tokens).
 
 ## Convenciones fijadas
 - [x] signo `-` siempre operador separado, nunca parte del número

@@ -1,7 +1,3 @@
-"""
-Uso:
-    python3 src/gui.py [archivo.pl]
-"""
 import os
 import sys
 import tkinter as tk
